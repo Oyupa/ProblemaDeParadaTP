@@ -1,0 +1,26 @@
+import java.util.concurrent.Callable;
+
+public class model.Reverser implements Callable<Boolean> {
+
+    private String program;
+
+    public model.Reverser(String program){
+        this.program = program;
+    }
+
+
+    /**
+     * Llama a model.HaltChecker y devuelve el resultado invertido
+     * @return true si el programa no se detiene, bucle infinito en caso contrario
+     */
+
+    @Override
+    public Boolean call() {
+        model.HaltChecker haltChecker = new model.HaltChecker(program, program);
+        boolean halt = haltChecker.call();
+        while (halt) {
+
+        }
+        return !halt;
+    }
+}

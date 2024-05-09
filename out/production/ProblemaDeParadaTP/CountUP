@@ -1,0 +1,12 @@
+public class CountUp{
+    private int n;
+    public CountDown(int n){
+        this.n = n;
+    }
+    public void countUp(){
+        while(n < 0){
+            System.out.println(n);
+            n++;
+        }
+    }
+}
