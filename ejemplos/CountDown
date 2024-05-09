@@ -1,0 +1,13 @@
+
+public class CountDown{
+    private int n;
+    public CountDown(int n){
+        this.n = n;
+    }
+    public void countDown(){
+        while(n > 0){
+            System.out.println(n);
+            n--;
+        }
+    }
+}
