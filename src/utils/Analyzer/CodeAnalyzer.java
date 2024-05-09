@@ -17,7 +17,14 @@ public class CodeAnalyzer  {
         return code.contains("while");
     }
 
-
+    /**
+     * Analiza el programa para comprobar si es un bucle infinito
+     * @param lines lineas del programa
+     * @param var expresión regular para encontrar un entero
+     * @param m matcher
+     * @param inputEntero input del programa
+     * @return true si el programa es un bucle infinito, false en caso contrario
+     */
     public boolean analizar(String[] lines, Pattern var, Matcher m, int inputEntero){
         if (!hasWhileLoop()){                                                       //si el programa no tiene un bucle while se detendra
             return false;
@@ -28,6 +35,14 @@ public class CodeAnalyzer  {
         int objetivo = resultado.getObjetivo();
         return noEsBucleInfinito(tipoBucle,tipoVariacion,objetivo, inputEntero);    //comprobamos si el bucle es infinito
     }
+    /**
+     * Comprueba si el bucle es infinito
+     * @param tipoBucle tipo de bucle
+     * @param tipoVariacion tipo de variación
+     * @param objetivo objetivo del bucle
+     * @param inputEntero input del programa
+     * @return true si el bucle es infinito, false en caso contrario
+     */
     private static boolean noEsBucleInfinito(TipoBucle tipoBucle,TipoVariacion tipoVariacion, int objetivo, int inputEntero){
         switch (tipoBucle){
             case IGUALQUE:
