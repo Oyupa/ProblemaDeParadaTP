@@ -1,0 +1,96 @@
+@startuml
+
+package model {
+    interface MaquinaTuningHandler {
+        + setProgram(program: String): void
+        + call(): void
+    }
+    abstract class HaltCheckerHandler {
+        # program: String
+        # input: String
+        # siguienteMaquina: MaquinaTuningHandler
+        + setSiguienteMaquina(maquina: MaquinaTuningHandler): void
+        + call(): Boolean
+    }
+
+    class HaltChecker {
+        + call(): Boolean
+    }
+
+    abstract class ReverserHandler {
+        # program: String
+        # siguienteMaquina: MaquinaTuningHandler
+        + setSiguienteMaquina(maquina: MaquinaTuningHandler): void
+        + call(): Boolean
+    }
+
+    class Reverser {
+        + call(): Boolean
+    }
+}
+
+package utils.Analyzer {
+    class CodeAnalyzer {
+        + hasWhileLoop(): boolean
+        + analizar(lines: String[], var: Pattern, m: Matcher, inputEntero: int): boolean
+    }
+
+    class AnalyzerResult {
+        # tipoBucle: TipoBucle
+        # tipoVariacion: TipoVariacion
+        # objetivo: int
+        + getTipoBucle(): TipoBucle
+        + setTipoBucle(tipoBucle: TipoBucle): void
+        + getTipoVariacion(): TipoVariacion
+        + setTipoVariacion(tipoVariacion: TipoVariacion): void
+        + getObjetivo(): int
+        + setObjetivo(objetivo: int): void
+    }
+
+    class LoopAnalyzer {
+        + encontrarConstante(linea: String, var: Pattern, m: Matcher): int
+        + analizarBucle(lineas: String[], var: Pattern, m: Matcher): AnalyzerResult
+    }
+
+    enum TipoBucle {
+        MAYORQUE
+        MENORQUE
+        IGUALQUE
+        OTRO
+    }
+
+    enum TipoVariacion {
+        CRECIENTE
+        DECRECIENTE
+        NULA
+    }
+}
+
+package utils.IO {
+    class FileManager {
+        + leerFicheroPrograma(ruta: String): String
+    }
+}
+
+package view {
+    class GraphicUI {
+        + main(args: String[]): void
+    }
+}
+
+ReverserHandler <|-- Reverser
+HaltCheckerHandler <|-- HaltChecker
+MaquinaTuningHandler <|.. HaltCheckerHandler
+MaquinaTuningHandler <|.. ReverserHandler
+
+HaltChecker --o Reverser
+GraphicUI *-- Reverser
+GraphicUI *-- HaltChecker
+GraphicUI -- FileManager
+
+LoopAnalyzer *-- AnalyzerResult
+AnalyzerResult *-- TipoBucle
+AnalyzerResult *-- TipoVariacion
+HaltChecker *-- CodeAnalyzer
+CodeAnalyzer *-- LoopAnalyzer
+@enduml
