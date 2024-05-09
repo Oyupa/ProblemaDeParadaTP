@@ -2,7 +2,7 @@ package view;
 
 import model.HaltChecker;
 import model.Reverser;
-import utils.GestorFicheros;
+import utils.IO.FileManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +24,7 @@ public class GraphicUI {
         this.countDownButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String programa = GestorFicheros.leerFicheroPrograma("ejemplos/CountDown");
+                String programa = FileManager.leerFicheroPrograma("ejemplos/CountDown");
                 Reverser reverser = new Reverser(programa);
                 if (reverser.call()) {
                     textPane1.setText("Fin de ejecución");
@@ -36,7 +36,7 @@ public class GraphicUI {
         this.reverserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String programa = GestorFicheros.leerFicheroPrograma("ejemplos/ReverserEjemplo");
+                String programa = FileManager.leerFicheroPrograma("ejemplos/ReverserEjemplo");
                 Reverser reverser = new Reverser(programa);
                 if (reverser.call()) {
                     textPane1.setText("Fin de ejecución");
@@ -48,7 +48,7 @@ public class GraphicUI {
         this.countUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String programa = GestorFicheros.leerFicheroPrograma("ejemplos/CountUp");
+                String programa = FileManager.leerFicheroPrograma("ejemplos/CountUp");
                 Reverser reverser = new Reverser(programa);
                 if (reverser.call()) {
                     textPane1.setText("Fin de ejecución");
@@ -60,7 +60,7 @@ public class GraphicUI {
         this.countUp10Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String programa = GestorFicheros.leerFicheroPrograma("ejemplos/CountUp");
+                String programa = FileManager.leerFicheroPrograma("ejemplos/CountUp");
                 HaltChecker haltChecker = new HaltChecker(programa, "10");
                 if (haltChecker.call()) {
                     textPane1.setText("El programa se detiene");
@@ -73,7 +73,7 @@ public class GraphicUI {
         this.countDown10Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String programa = GestorFicheros.leerFicheroPrograma("ejemplos/CountDown");
+                String programa = FileManager.leerFicheroPrograma("ejemplos/CountDown");
                 HaltChecker haltChecker = new HaltChecker(programa, "10");
                 if (haltChecker.call()) {
                     textPane1.setText("El programa se detiene");
@@ -86,7 +86,7 @@ public class GraphicUI {
         this.reverserReverserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String programa = GestorFicheros.leerFicheroPrograma("ejemplos/ReverserEjemplo");
+                String programa = FileManager.leerFicheroPrograma("ejemplos/ReverserEjemplo");
                 HaltChecker haltChecker = new HaltChecker(programa, programa);
                 if (haltChecker.call()) {
                     textPane1.setText("El programa se detiene");
@@ -98,12 +98,11 @@ public class GraphicUI {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("GraphicUI");
+        JFrame frame = new JFrame("Problema de la parada de Alan Turing");
         frame.setContentPane(new GraphicUI().Aplicacion);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-
 
     }
 
